@@ -20,5 +20,16 @@ namespace checkout_test
 
             sut.Scan(item);
         }
+
+        [Fact]
+        public void Able_To_Request_Total_Starting_Amount_Is_Zero() 
+        {
+            var item = new Item();
+            var sut = new Checkout();
+
+            var total = sut.Total();
+
+            Assert.Equal(0m, total);
+        }
     }
 }
