@@ -1,14 +1,14 @@
 namespace checkout_app {
 
     public class Item {
-        public Item(string sku, decimal price)
+        public Item(string sku, decimal unitPrice)
         {
             Sku = sku;
-            Price = price;
+            this.UnitPrice = unitPrice;
         }
 
         public string Sku { get; } 
-        public decimal Price { get; }
+        public decimal UnitPrice { get; }
     }
 
 }

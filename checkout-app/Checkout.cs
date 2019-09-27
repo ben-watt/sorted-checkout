@@ -17,22 +17,22 @@ namespace checkout_app
             _offers = offers;
         }
 
-        public void Scan(Item item) 
+        public void Scan(Item item)
         {
             _items.Add(item);
-            _total += item.Price;
-            
+            _total += item.UnitPrice;
+            ApplyFirstValidOffer(item);
+        }
+
+        private void ApplyFirstValidOffer(Item item)
+        {
             var itemCount = _items.Count(i => i.Sku == item.Sku);
             var validOffer = _offers.FirstOrDefault(offer => offer.Sku == item.Sku && itemCount % offer.Quantity == 0);
-            if(validOffer != null) {
-                _total = _total - (item.Price * validOffer.Quantity) + validOffer.Price;
-            }
-        }
-        public decimal Total() => _total;
 
-        private bool OfferApplies(Item item)
-        {
-            return false;
+            if (validOffer != null)
+                _total = _total - (item.UnitPrice * validOffer.Quantity) + validOffer.Price;
         }
+
+        public decimal Total() => _total;
     }
 }
