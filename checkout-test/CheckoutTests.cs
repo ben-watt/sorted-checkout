@@ -1,6 +1,7 @@
 using System;
 using Xunit;
 using checkout_app;
+using System.Collections.Generic;
 
 namespace checkout_test
 {
@@ -42,6 +43,23 @@ namespace checkout_test
             var total = sut.Total();
 
             Assert.Equal(1.99m, total);
+        }
+
+        [Fact]
+        public void When_Two_Items_Added_And_Offer_Applies_Reduce_Total_Correctly() 
+        {
+            var item = new Item("A99", 2m);
+            var offers = new List<Offer>() {
+                new Offer("A99", 2, 2.99m)
+            };
+
+            var sut = new Checkout(offers);
+
+            sut.Scan(item);
+            sut.Scan(item);
+            var total = sut.Total();
+
+            Assert.Equal(2.99m, total);
         }
     }
 }
