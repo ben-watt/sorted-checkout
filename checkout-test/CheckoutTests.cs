@@ -61,5 +61,31 @@ namespace checkout_test
 
             Assert.Equal(2.99m, total);
         }
+
+        [Fact]
+        public void When_More_Than_One_Item_And_More_Than_One_Offer_Total_Calculates_Correctly() 
+        {
+            var apple = new Item("A99", 0.5m);
+            var biscuit = new Item("B15", 0.3m);
+            var carrot = new Item("C40", 0.6m);
+
+            var offers = new List<Offer>() {
+                new Offer("A99", 3, 1.30m),
+                new Offer("B15", 2, 0.45m)
+            };
+
+            var sut = new Checkout(offers);
+
+            sut.Scan(apple);
+            sut.Scan(biscuit);
+            sut.Scan(carrot);
+            sut.Scan(biscuit);
+            sut.Scan(apple);
+            sut.Scan(apple);
+            sut.Scan(apple);    
+            var totalPrice = sut.Total();
+
+            Assert.Equal(2.85m, totalPrice); 
+        }
     }
 }
