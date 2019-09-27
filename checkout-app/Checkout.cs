@@ -16,6 +16,8 @@ namespace checkout_app
         {
             _offers = offers;
         }
+        
+        public decimal Total() => _total;
 
         public void Scan(Item item)
         {
@@ -32,7 +34,5 @@ namespace checkout_app
             if (validOffer != null)
                 _total = _total - (item.UnitPrice * validOffer.Quantity) + validOffer.Price;
         }
-
-        public decimal Total() => _total;
     }
 }
