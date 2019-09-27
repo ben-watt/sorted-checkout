@@ -4,7 +4,7 @@ namespace checkout_app {
         public Item(string sku, decimal unitPrice)
         {
             Sku = sku;
-            this.UnitPrice = unitPrice;
+            UnitPrice = unitPrice;
         }
 
         public string Sku { get; } 
