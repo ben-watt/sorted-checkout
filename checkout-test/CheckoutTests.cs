@@ -11,5 +11,14 @@ namespace checkout_test
         {
             var sut = new Checkout();
         }
+
+        [Fact]
+        public void Able_To_Scan_Item() 
+        {
+            var item = new Item();
+            var sut = new Checkout();
+
+            sut.Scan(item);
+        }
     }
 }
